@@ -1,7 +1,8 @@
 node_modules
+.agents
 .vscode-test
 .vscode
 .idea
-package-lock.json
 *.vsix
 out
+*.tsbuildinfo

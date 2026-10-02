@@ -11,6 +11,15 @@
     "engines": {
         "vscode": "^1.91.0"
     },
+    "extensionKind": [
+        "workspace"
+    ],
+    "capabilities": {
+        "untrustedWorkspaces": {
+            "supported": false,
+            "description": "The extension launches DelphiLSP and generates/runs build scripts based on workspace files and settings."
+        }
+    },
     "categories": [
         "Programming Languages"
     ],
@@ -53,7 +62,7 @@
                 "delphi.bin": {
                     "type": "string",
                     "default": "",
-                    "description": "Path to Delphi `bin` folder. Defaults to newest installation."
+                    "description": "Path to Delphi `bin` folder (must contain DelphiLSP.exe). Defaults to newest installation."
                 },
                 "delphi.serverType": {
                     "type": "string",
@@ -121,27 +130,24 @@
         "pretty": "prettier --write ./src/**/*",
         "check:types": "tsc --noEmit",
         "check:format": "prettier --check ./src/**/*",
-        "check:all": "npm run check:types && npm run check:format"
+        "lint": "eslint src",
+        "check:all": "npm run check:types && npm run check:format && npm run lint"
     },
     "devDependencies": {
-        "@eslint/js": "^9.7.0",
-        "@types/eslint__js": "^8.42.3",
-        "@types/mocha": "^10.0.6",
-        "@types/node": "^18.14.6",
-        "@types/semver": "^7.5.8",
-        "@types/vscode": "^1.91.0",
-        "@typescript-eslint/eslint-plugin": "^7.1.0",
-        "@typescript-eslint/parser": "^7.1.0",
-        "@vscode/test-electron": "^2.3.9",
-        "eslint": "^8.57.0",
-        "mocha": "^10.3.0",
-        "prettier": "^3.3.3",
-        "typescript": "^5.5.3",
-        "typescript-eslint": "^7.16.1"
+        "@eslint/js": "^10.0.1",
+        "@types/mocha": "^10.0.10",
+        "@types/node": "^20.19.43",
+        "@types/semver": "^7.8.0",
+        "@types/vscode": "~1.91.0",
+        "@vscode/test-electron": "^3.1.0",
+        "eslint": "^10.11.0",
+        "mocha": "^12.0.3",
+        "prettier": "^3.9.9",
+        "typescript": "^5.9.3",
+        "typescript-eslint": "^8.71.0"
     },
     "dependencies": {
-        "applicationinsights": "^3.2.1",
-        "semver": "^7.6.3",
-        "vscode-languageclient": "^9.0.1"
+        "semver": "^7.8.5",
+        "vscode-languageclient": "^10.1.2"
     }
 }

@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { workspace, ExtensionContext, commands, Uri } from 'vscode';
+import { workspace, ExtensionContext, commands, window } from 'vscode';
 
 import {
     LanguageClient,
@@ -26,10 +26,17 @@ let client: LanguageClient;
 export async function activateLSPClient(context: ExtensionContext) {
     // Get config for the extension
     const config = workspace.getConfiguration('delphi');
-    const binPath = config.get<string>('bin');
+
+    const binDir = getDelphiBinDirectory();
+    if (!binDir) {
+        window.showErrorMessage(
+            `Delphi: ${LSP_BIN} was not found. Install Delphi 11 or later, or set "delphi.bin" to its bin folder.`
+        );
+        return;
+    }
 
     // Get full path for the LSP executable
-    const delphiLSP = path.join(getDelphiBinDirectory(), LSP_BIN);
+    const delphiLSP = path.join(binDir, LSP_BIN);
 
     // Get current folder
     let folder = 'nofolderOpened';
